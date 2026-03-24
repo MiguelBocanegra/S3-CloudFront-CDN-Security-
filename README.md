@@ -30,6 +30,18 @@ User (Browser) → HTTPS Request → CloudFront Distribution (CDN) → Amazon S3
 
 ![Architecture](./image-s3-cloudfront/Infra.png)
 
+## Prerequisites
+Before starting this project, the following requirements are needed:
+
+An active AWS account
+Basic knowledge of Linux commands
+IAM user with programmatic access (Access Key & Secret Key)
+A terminal environment (e.g., VS Code, Codespaces, or local machine)
+Internet connection
+Optional:
+
+Basic understanding of cloud computing concepts
+
 ## AWS Services Used
 
 | Service | Purpose |
