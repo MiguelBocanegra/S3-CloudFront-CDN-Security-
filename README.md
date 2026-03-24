@@ -1,19 +1,19 @@
-# 🚀 AWS Static Website with S3 + CloudFront (CLI Project)
+#  AWS Static Website with S3 + CloudFront (CLI Project)
 
-## 📌 Project Overview
+## Project Overview
 This project demonstrates how to deploy a static website on AWS using the AWS CLI, including IAM user creation, CLI configuration, S3 bucket setup, and CloudFront distribution. The implementation was performed manually using scripts to simulate a real-world environment and automation workflow.
 
-## 🛠️ Tech Stack
+## Tech Stack
 - Amazon S3
 - Amazon CloudFront
 - AWS IAM
 - AWS CLI
 - Bash scripting
 
-## 🧱 Architecture
+## Architecture
 User (Browser) → HTTPS Request → CloudFront Distribution (CDN) → Amazon S3 Bucket (Static Website)
 
-## ⚙️ Implementation Steps
+## Implementation Steps
 1. Log in to the AWS Management Console and open CloudShell.  
 2. Create an IAM user using: aws iam create-user --user-name <user_name>  
 3. Attach permissions using: aws iam attach-user-policy --user-name <user_name> --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess  
@@ -30,28 +30,28 @@ User (Browser) → HTTPS Request → CloudFront Distribution (CDN) → Amazon S3
 14. Re-enable security restrictions using: aws s3api put-public-access-block --bucket <your-bucket-name> --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true.  
 15. Retrieve the CloudFront domain using: aws cloudfront list-distributions and open https://<distribution-domain>/index.html in a browser.  
 
-## ⚠️ Challenges Faced
+## Challenges Faced
 - Managing public access restrictions in S3  
 - Understanding CloudFront configuration  
 - Handling hidden characters in scripts  
 
-## ✅ Solutions Implemented
+## Solutions Implemented
 - Removed hidden characters using sed  
 - Applied correct bucket policies  
 - Configured public access step-by-step  
 
-## 🧠 What I Learned
+## What I Learned
 - How to deploy a static website using AWS CLI  
 - How to configure IAM users and permissions  
 - How S3 security works (public vs private)  
 - How CloudFront integrates with S3  
 - Importance of automation using scripts  
 
-## 🚀 Future Improvements
+## Future Improvements
 - Add HTTPS using AWS Certificate Manager  
 - Automate deployment with CI/CD  
 - Use Infrastructure as Code (Terraform)  
 
-## 👨‍💻 Author
+## Author
 Miguel Bocanegra  
-GitHub: https://github.com/MiguelBocanegra
+
