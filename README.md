@@ -102,7 +102,7 @@ Basic understanding of cloud computing concepts
 2. Create an IAM user using:
 ```bash
 aws iam create-user --user-name <user_name>
-```bash
+```
 
 ![step_2](./image-s3-cloudfront/2.png)
 
