@@ -106,7 +106,15 @@ aws iam create-user --user-name <user_name>
 
 ![step_2](./image-s3-cloudfront/2.png)
 
-5. Attach permissions using: aws iam attach-user-policy --user-name <user_name> --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess  
+3. Attach permissions for s3 using:
+
+```bash
+   aws iam attach-user-policy\
+   --user-name <user_name>\
+   --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
+```
+![step_3](./image-s3-cloudfront/3.png)
+
 6. Attach CloudFront permissions using: aws iam attach-user-policy --user-name <user_name> --policy-arn arn:aws:iam::aws:policy/CloudFrontFullAccess  
 7. Validate permissions using: aws iam list-attached-user-policies --user-name <user_name>  
 8. Create access keys using: aws iam create-access-key --user-name <user_name> and store them securely.  
