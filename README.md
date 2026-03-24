@@ -28,6 +28,8 @@ This project demonstrates how to deploy a static website on AWS using the AWS CL
 ## Architecture
 User (Browser) → HTTPS Request → CloudFront Distribution (CDN) → Amazon S3 Bucket (Static Website)
 
+![Architecture](./image-s3-cloudfront/infra.png)
+
 ## AWS Services Used
 
 | Service | Purpose |
