@@ -28,6 +28,17 @@ This project demonstrates how to deploy a static website on AWS using the AWS CL
 ## Architecture
 User (Browser) → HTTPS Request → CloudFront Distribution (CDN) → Amazon S3 Bucket (Static Website)
 
+## AWS Services Used
+
+| Service | Purpose |
+|--------|--------|
+| Amazon S3 | Stores and hosts static website files |
+| Amazon CloudFront | Delivers content globally with low latency (CDN) |
+| AWS IAM | Manages user permissions and secure access |
+| AWS CLI | Automates resource creation and management |
+| Bash Scripts | Automates deployment and configuration tasks |
+| HTML/CSS | Provides the static website content |
+
 ## Implementation Steps
 1. Log in to the AWS Management Console and open CloudShell.  
 2. Create an IAM user using: aws iam create-user --user-name <user_name>  
