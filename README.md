@@ -42,6 +42,46 @@ Optional:
 
 Basic understanding of cloud computing concepts
 
+## Steps Overview
+
+1. **Create IAM User**
+   - Created a new IAM user using AWS CLI  
+   - Assigned permissions for S3 and CloudFront  
+
+2. **Configure AWS CLI**
+   - Installed AWS CLI using a Bash script  
+   - Configured credentials (Access Key, Secret Key, Region)  
+   - Validated identity with `aws sts get-caller-identity`  
+
+3. **Create S3 Bucket**
+   - Created a new S3 bucket via CLI  
+   - Configured region and naming  
+   - Blocked all public access for security  
+
+4. **Upload Website Files**
+   - Synced local project files using `aws s3 sync`  
+   - Verified upload with `aws s3 ls`  
+
+5. **Configure Bucket Policy (Testing Phase)**
+   - Temporarily disabled Block Public Access  
+   - Applied bucket policy for public read access  
+   - Validated access via S3 URL  
+
+6. **Create CloudFront Distribution**
+   - Created a distribution pointing to S3 bucket  
+   - Resolved IAM permission errors  
+   - Waited for deployment status  
+
+7. **Secure the Infrastructure**
+   - Re-enabled Block Public Access on S3  
+   - Ensured content is only served via CloudFront  
+
+8. **Validate Deployment**
+   - Retrieved CloudFront domain  
+   - Accessed website via CDN  
+   - Confirmed successful delivery  
+
+
 ## AWS Services Used
 
 | Service | Purpose |
