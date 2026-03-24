@@ -1,3 +1,18 @@
+![Status](https://img.shields.io/badge/Status-Completed-success?style=flat-square)
+
+![Difficulty](https://img.shields.io/badge/Difficulty-Beginner-green?style=for-the-badge&logo=speedtest&logoColor=white)
+
+# 🚀 AWS S3 + CloudFront Static Website
+
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange)
+![S3](https://img.shields.io/badge/Amazon-S3-blue)
+![CloudFront](https://img.shields.io/badge/Amazon-CloudFront-purple)
+![IAM](https://img.shields.io/badge/AWS-IAM-yellow)
+![CLI](https://img.shields.io/badge/AWS-CLI-black)
+![Security](https://img.shields.io/badge/Security-Private%20Bucket-red)
+![CDN](https://img.shields.io/badge/CDN-CloudFront-green)
+![Project](https://img.shields.io/badge/Project-Cloud%20Deployment-brightgreen)
+
 #  AWS Static Website with S3 + CloudFront (CLI Project)
 
 ## Project Overview
