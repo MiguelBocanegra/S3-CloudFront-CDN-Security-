@@ -1,8 +1,8 @@
-![Status](https://img.shields.io/badge/Status-Completed-success?style=flat-square)
+![Status](https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square)
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Beginner-green?style=for-the-badge&logo=speedtest&logoColor=white)
 
-# 🚀 AWS S3 + CloudFront Static Website
+# AWS S3 + CloudFront Static Website
 
 ![AWS](https://img.shields.io/badge/AWS-Cloud-orange)
 ![S3](https://img.shields.io/badge/Amazon-S3-blue)
