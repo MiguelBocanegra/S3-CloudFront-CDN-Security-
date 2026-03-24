@@ -94,6 +94,7 @@ Basic understanding of cloud computing concepts
 | HTML/CSS | Provides the static website content |
 
 ## Implementation Steps
+## 📸 Screenshots
 1. Log in to the AWS Management Console and open CloudShell.  
 2. Create an IAM user using: aws iam create-user --user-name <user_name>  
 3. Attach permissions using: aws iam attach-user-policy --user-name <user_name> --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess  
