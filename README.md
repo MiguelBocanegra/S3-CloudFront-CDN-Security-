@@ -133,10 +133,10 @@ aws iam list-attached-user-policies --user-name <user_name>
 ```
 ![step_5](./image-s3-cloudfront/5.png)
 
-6. Create access keys using:
+6. Create access keys using and store them securely:
    
 ```bash 
-aws iam create-access-key --user-name <user_name> and store them securely.
+aws iam create-access-key --user-name <user_name>
 ```
 ![step_6](./image-s3-cloudfront/6.png)
 
