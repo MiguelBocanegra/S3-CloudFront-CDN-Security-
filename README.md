@@ -108,11 +108,13 @@ aws iam create-user --user-name <user_name>
 ```
 ![step_2](./image-s3-cloudfront/2.png)
 
-We run the command to give access to S3 to the new user:
+3- We run the command to give access to S3 to the new user:
 
+```bash
 aws iam attach-user-policy \
 --user-name <user_name> \
 --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
+```
 
 We run the command to give access to CloudFront to the new user:
 
