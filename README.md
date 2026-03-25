@@ -126,14 +126,20 @@ aws iam attach-user-policy \
 ![step_4](./image-s3-cloudfront/4.png)
 
 
-8. Validate permissions using:
+5. Validate permissions using:
    
 ```bash 
 aws iam list-attached-user-policies --user-name <user_name>
 ```
 ![step_5](./image-s3-cloudfront/5.png)
 
-10. Create access keys using: aws iam create-access-key --user-name <user_name> and store them securely.  
+6. Create access keys using:
+   
+```bash 
+aws iam create-access-key --user-name <user_name> and store them securely.
+```
+![step_6](./image-s3-cloudfront/6.png)
+
 11. Prepare CLI installation script by removing hidden characters with: sed -i 's/\r$//' cli.sh, then run chmod +x cli.sh and sudo ./cli.sh. This script updates the system, installs curl and unzip, downloads AWS CLI, installs it, and verifies installation using aws --version.  
 12. Configure AWS CLI using: sed -i 's/\r$//' awsversion.sh, chmod +x awsversion.sh, and sudo ./awsversion.sh. This script requests Access Key, Secret Key, region, and output format, then configures AWS CLI and validates with aws sts get-caller-identity.  
 13. Create and configure the S3 bucket using: sed -i 's/\r$//' awss3buc.sh, chmod +x awss3buc.sh, and sudo ./awss3buc.sh. This script creates the bucket with aws s3api create-bucket --bucket $BUCKET_NAME --region $REGION, blocks public access using aws s3api put-public-access-block, uploads files with aws s3 sync $WEB_DIR s3://$BUCKET_NAME/, and validates with aws s3 ls s3://$BUCKET_NAME.  
