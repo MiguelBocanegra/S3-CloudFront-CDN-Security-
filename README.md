@@ -102,7 +102,7 @@ Basic understanding of cloud computing concepts
 
 We generate a new user using the CLI with the following steps.
 ---
-We run the command to create a user:
+2- We run the command to create a user:
 ```bash
 aws iam create-user --user-name <user_name>
 ```
