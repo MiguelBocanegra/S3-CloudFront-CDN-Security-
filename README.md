@@ -140,7 +140,32 @@ aws iam create-access-key --user-name <user_name>
 ```
 ![step_6](./image-s3-cloudfront/6.png)
 
-11. Prepare CLI installation script by removing hidden characters with: sed -i 's/\r$//' cli.sh, then run chmod +x cli.sh and sudo ./cli.sh. This script updates the system, installs curl and unzip, downloads AWS CLI, installs it, and verifies installation using aws --version.  
+7. Prepare CLI installation script by removing hidden characters with:
+   
+```bash
+sed -i 's/\r$//' cli.sh
+```
+then run 
+
+```bash
+chmod +x cli.sh
+```
+and 
+
+```bash
+sudo ./cli.sh
+```
+This script updates the system, installs curl and unzip, downloads AWS CLI, installs it, and verifies installation using aws --version.  
+
+```bash
+#!/bin/bash
+sudo apt update -y
+sudo apt install -y unzip curl
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws –version
+```
 12. Configure AWS CLI using: sed -i 's/\r$//' awsversion.sh, chmod +x awsversion.sh, and sudo ./awsversion.sh. This script requests Access Key, Secret Key, region, and output format, then configures AWS CLI and validates with aws sts get-caller-identity.  
 13. Create and configure the S3 bucket using: sed -i 's/\r$//' awss3buc.sh, chmod +x awss3buc.sh, and sudo ./awss3buc.sh. This script creates the bucket with aws s3api create-bucket --bucket $BUCKET_NAME --region $REGION, blocks public access using aws s3api put-public-access-block, uploads files with aws s3 sync $WEB_DIR s3://$BUCKET_NAME/, and validates with aws s3 ls s3://$BUCKET_NAME.  
 14. Create a CloudFront distribution using: aws cloudfront create-distribution --origin-domain-name your-bucket-name.s3.amazonaws.com.  
