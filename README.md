@@ -118,19 +118,29 @@ aws iam attach-user-policy \
 
 ![step_3](./image-s3-cloudfront/3.png)
 
-We run the command to give access to CloudFront to the new user:
+4- We run the command to give access to CloudFront to the new user:
 
+```bash
 aws iam attach-user-policy \
 --user-name <user_name> \
 --policy-arn arn:aws:iam::aws:policy/CloudFrontFullAccess
+```
 
-We can validate if the user has all required permissions with the command:
+![step_4](./image-s3-cloudfront/4.png)
 
+5- We can validate if the user has all required permissions with the command:
+
+```bash
 aws iam list-attached-user-policies --user-name <user_name>
+```
+![step_5](./image-s3-cloudfront/5.png)
 
-We validate if the policies were applied to the new user with the command:
+6- We create an access key for the new user so that we can work with this user in a Codespace using the following command:
 
-aws iam list-attached-user-policies --user-name <user_name>
+```bash
+aws iam create-access-key --user-name <user_name>
+```
+![step_6](./image-s3-cloudfront/6.png)
 
 We create the access key for the new user so we can work with this user in a Codespace:
 
@@ -304,142 +314,6 @@ We take the DomainName value and append /index.html, then open it in a browser:
 
 d2y6ebsgu5chp6.cloudfront.net/index.html
 
-
-
-
-2. Create an IAM user using:
-```bash
-aws iam create-user --user-name <user_name>
-```
-
-![step_2](./image-s3-cloudfront/2.png)
-
-3. Attach permissions for s3 using:
-
-```bash
-   aws iam attach-user-policy\
-   --user-name <user_name>\
-   --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
-```
-![step_3](./image-s3-cloudfront/3.png)
-
-4. Attach CloudFront permissions using:
-   
-```bash
-aws iam attach-user-policy \
---user-name <user_name>  \
---policy-arn arn:aws:iam::aws:policy/CloudFrontFullAccess
-```
-
-![step_4](./image-s3-cloudfront/4.png)
-
-
-5. Validate permissions using:
-   
-```bash 
-aws iam list-attached-user-policies --user-name <user_name>
-```
-![step_5](./image-s3-cloudfront/5.png)
-
-6. Create access keys using and store them securely:
-   
-```bash 
-aws iam create-access-key --user-name <user_name>
-```
-![step_6](./image-s3-cloudfront/6.png)
-
-7. Prepare CLI installation script  cli.sh by removing hidden characters with:
-   
-```bash
-sed -i 's/\r$//' cli.sh
-```
-then run 
-
-```bash
-chmod +x cli.sh
-```
-and 
-
-```bash
-sudo ./cli.sh
-```
-This script updates the system, installs curl and unzip, downloads AWS CLI, installs it, and verifies installation using aws --version.  
-
-```bash
-#!/bin/bash
-sudo apt update -y
-sudo apt install -y unzip curl
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-aws –version
-```
-8. Configure AWS CLI using the script awsversion.sh:
-
-sed -i 's/\r$//' awsversion.sh \
-chmod +x awsversion.sh\
-./awsversion.sh. 
-
-This script requests Access Key, Secret Key, region, and output format, then configures AWS CLI and validates with aws sts get-caller-identity.  
-```bash
-#!/bin/bash
-
-read -p "Introduce tu Access Key ID: " ACCESS_KEY
-read -sp "Introduce tu Secret Access Key: " SECRET_KEY
-echo " "
-read -p "Introduce la Región (ej. us-east-1): " REGION
-read -p "Formato de salida (ej. json): " OUTPUT_FORMAT
-
-aws –version
-
-aws configure set aws_access_key_id "$ACCESS_KEY"
-aws configure set aws_secret_access_key "$SECRET_KEY"
-aws configure set default.region "$REGION"
-aws configure set default.output "$OUTPUT_FORMAT"
-
-aws sts get-caller-identity
-```
-9. Create and configure the S3 bucket using el script awss3buc.sh :
-
-```bash
-sed -i 's/\r$//' awss3buc.sh
-chmod +x awss3buc.sh
-and sudo ./awss3buc.sh
-```
-This script creates a new S3 bucket and restricts access to it by default.
-
-```bash
-#!/bin/bash
-
-REGION="us-east-1"
-
-read -p "Introduce nombre del Bucket: " BUCKET_NAME
-read -p "Introduce nombre la Ruta de la carpeta: " WEB_DIR
-
-s3api create-bucket \
---bucket $BUCKET_NAME \
---region $REGION
-
-aws s3api put-public-access-block \
---bucket $BUCKET_NAME \
---public-access-block-configuration \
-BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
-
-aws s3 sync $WEB_DIR s3://$BUCKET_NAME/
-
-aws s3 ls s3://$BUCKET_NAME
-```
-
-10. Create a CloudFront distribution using:
-
-```bash
-aws cloudfront create-distribution --origin-domain-name your-bucket-name.s3.amazonaws.com.
-```
-11. Create a policy.json file with permissions to allow public read access to S3 objects.  
-18. Temporarily enable public access using: aws s3api put-public-access-block --bucket <bucket_name> --public-access-block-configuration BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false.  
-19. Apply the bucket policy using: aws s3api put-bucket-policy --bucket your-bucket-name --policy file://policy.json.  
-20. Re-enable security restrictions using: aws s3api put-public-access-block --bucket <your-bucket-name> --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true.  
-21. Retrieve the CloudFront domain using: aws cloudfront list-distributions and open https://<distribution-domain>/index.html in a browser.  
 
 ## Challenges Faced
 - Managing public access restrictions in S3  
