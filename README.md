@@ -200,7 +200,9 @@ aws --version
 
 If AWS CLI is properly installed, the console will show the installed version.
 
-Now we add the access key so we can work in the CLI with the new user.
+![step_7](./image-s3-cloudfront/7.png)
+
+8- Now we add the access key so we can work in the CLI with the new user.
 
 We run the command:
 sed -i 's/\r$//' awsversion.sh to remove invisible characters.
