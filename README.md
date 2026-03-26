@@ -142,42 +142,61 @@ aws iam create-access-key --user-name <user_name>
 ```
 ![step_6](./image-s3-cloudfront/6.png)
 
-We create the access key for the new user so we can work with this user in a Codespace:
+7- Now we install the CLI and set up the user’s access key. For this, we run the script cli.sh.
 
-aws iam create-access-key --user-name <user_name>  
-
-sed -i 's/\r$//' CLI.sh
-
-Now we install the CLI and set up the user’s access key. For this, we run the script cli.sh.
-
-We run the command:
-sed -i 's/\r$//' CLI.sh to remove all invisible characters.
-
+- We run the command to remove all invisible characters.
+  
+```bash
+sed -i 's/\r$//' cli.sh
+```
 We change the permissions so we can execute the file:
+
+```bash
 chmod +x cli.sh
+```
+- We run the command to install AWS CLI:
 
-We run the command:
-sudo ./cli.sh to install AWS CLI.
-
+```bash
+sudo ./cli.sh 
+```
 The script works as follows:
+---
 
 It updates the system:
+
+```bash
 sudo apt update -y
+```
 
 It installs curl (to download files) and unzip (to extract files):
+
+```bash
 sudo apt install -y unzip curl
+```
 
 It downloads the AWS CLI package:
+
+```bash
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+```
 
 It unzips the package:
+
+```bash
 unzip awscliv2.zip
+```
 
 It installs AWS CLI:
+
+```bash
 sudo ./aws/install
+```
 
 It validates the installation:
+
+```bash
 aws --version
+```
 
 If AWS CLI is properly installed, the console will show the installed version.
 
