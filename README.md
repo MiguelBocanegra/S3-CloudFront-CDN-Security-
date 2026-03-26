@@ -116,6 +116,8 @@ aws iam attach-user-policy \
 --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
 ```
 
+![step_3](./image-s3-cloudfront/3.png)
+
 We run the command to give access to CloudFront to the new user:
 
 aws iam attach-user-policy \
