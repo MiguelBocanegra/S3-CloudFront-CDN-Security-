@@ -2,7 +2,7 @@
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Beginner-green?style=for-the-badge&logo=speedtest&logoColor=white)
 
-# AWS S3 + CloudFront Static Website
+--- 
 
 ![AWS](https://img.shields.io/badge/AWS-Cloud-orange)
 ![S3](https://img.shields.io/badge/Amazon-S3-blue)
@@ -26,21 +26,23 @@ This project demonstrates how to deploy a static website on AWS using the AWS CL
 - Bash scripting
 
 ## Architecture
-User (Browser) → HTTPS Request → CloudFront Distribution (CDN) → Amazon S3 Bucket (Static Website)
+
+User (Browser) → HTTPS Request → CloudFront (CDN) → S3 Bucket (Private Static Website)
 
 ![Architecture](./image-s3-cloudfront/Infra.png)
 
 ## Prerequisites
+
 Before starting this project, the following requirements are needed:
 
-An active AWS account
-Basic knowledge of Linux commands
-IAM user with programmatic access (Access Key & Secret Key)
-A terminal environment (e.g., VS Code, Codespaces, or local machine)
-Internet connection
-Optional:
+- An active AWS account  
+- Basic knowledge of Linux commands  
+- IAM user with programmatic access (Access Key & Secret Key)  
+- A terminal environment (e.g., VS Code, Codespaces, or local machine)  
+- Internet connection  
 
-Basic understanding of cloud computing concepts
+**Optional:**
+- Basic understanding of cloud computing concepts  
 
 ## Steps Overview
 
@@ -298,7 +300,7 @@ aws s3api create-bucket \
 --bucket $BUCKET_NAME \
 --region $REGION
 ```
-It ensures that all access to the bucket is denied:
+It blocks all public access to the bucket to improve security.:
 
 ```bash
 aws s3api put-public-access-block \
@@ -391,25 +393,51 @@ d2y6ebsgu5chp6.cloudfront.net/index.html
 ## Challenges Faced
 - Managing public access restrictions in S3  
 - Understanding CloudFront configuration  
-- Handling hidden characters in scripts  
+- Handling hidden characters in scripts
+
+## Project Impact
+
+- Demonstrates end-to-end AWS deployment using CLI  
+- Implements secure S3 configuration (Block Public Access)  
+- Uses CloudFront as a CDN for performance and scalability  
+- Automates tasks using Bash scripts  
+- Applies troubleshooting to resolve real-world errors
+
+  ## Security Considerations
+
+- S3 bucket public access was temporarily enabled only for testing  
+- Block Public Access was re-enabled after validation  
+- IAM permissions were required for CloudFront operations
 
 ## Solutions Implemented
+
 - Removed hidden characters using sed  
 - Applied correct bucket policies  
 - Configured public access step-by-step  
 
 ## What I Learned
-- How to deploy a static website using AWS CLI  
-- How to configure IAM users and permissions  
-- How S3 security works (public vs private)  
-- How CloudFront integrates with S3  
-- Importance of automation using scripts  
+
+- How to deploy and manage AWS resources using CLI  
+- How IAM policies control access to services  
+- How S3 security works (public vs private access)  
+- How CloudFront integrates with S3 as a CDN  
+- The importance of automation using Bash scripts  
+- How to troubleshoot real AWS errors effectively  
+ 
+## Challenges Faced
+
+- Handling S3 Block Public Access restrictions  
+- Resolving IAM permission errors (AccessDenied)  
+- Fixing script execution issues caused by hidden characters  
+- Understanding CloudFront deployment behavior  
 
 ## Future Improvements
+
 - Add HTTPS using AWS Certificate Manager  
 - Automate deployment with CI/CD  
 - Use Infrastructure as Code (Terraform)  
 
 ## Author
+
 Miguel Bocanegra  
 
