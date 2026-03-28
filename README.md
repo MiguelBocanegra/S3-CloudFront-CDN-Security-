@@ -104,8 +104,7 @@ Before starting this project, the following requirements are needed:
 | Bash Scripts | Automates deployment and configuration tasks |
 | HTML/CSS | Provides the static website content |
 
-## Implementation Steps
-## 📸 Screenshots
+## 📸 Implementation Steps (Screenshots)
 
 1- We enter the AWS console and then access CloudShell.
 
@@ -341,17 +340,18 @@ This command returns a JSON response with the CloudFront distribution configurat
 
 11- Now we create a JSON policy file to allow read access to S3 objects:
 
+```json
 {
-"Version": "2012-10-17",
-"Statement": [
-{
-"Sid": "AllowCloudFrontAccess",
-"Effect": "Allow",
-"Principal": "*",
-"Action": "s3:GetObject",
-"Resource": "arn:aws:s3:::your-bucket-name/*"
-}
-]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowCloudFrontAccess",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::your-bucket-name/*"
+    }
+  ]
 }
 
 ![step_11](./image-s3-cloudfront/11.png)
