@@ -27,9 +27,18 @@ This project demonstrates how to deploy a static website on AWS using the AWS CL
 
 ## Architecture
 
-User (Browser) → HTTPS Request → CloudFront (CDN) → S3 Bucket (Private Static Website)
+User (Browser) → HTTPS Request → CloudFront (CDN) → S3 Bucket (Private, temporarily public for testing)
 
 ![Architecture](./image-s3-cloudfront/Infra.png)
+
+## Architecture Summary
+
+This architecture uses Amazon CloudFront as a CDN to securely deliver content stored in a private S3 bucket.
+
+- The user sends an HTTPS request  
+- CloudFront receives and processes the request  
+- CloudFront retrieves content from the S3 bucket  
+- The content is delivered with low latency and improved performance  
 
 ## Prerequisites
 
@@ -300,7 +309,7 @@ aws s3api create-bucket \
 --bucket $BUCKET_NAME \
 --region $REGION
 ```
-It blocks all public access to the bucket to improve security.:
+It blocks all public access to the bucket to improve security.
 
 ```bash
 aws s3api put-public-access-block \
@@ -326,13 +335,12 @@ We run the following command:
 aws cloudfront create-distribution \
 --origin-domain-name your-bucket-name.s3.amazonaws.com
 ```
-This command generates a large JSON output.
+This command returns a JSON response with the CloudFront distribution configuration.
 
 ![step_10](./image-s3-cloudfront/10.png)
 
-11- Now we create a new .json file and add the policy that allows access to the S3 objects:
+11- Now we create a JSON policy file to allow read access to S3 objects:
 
-```bash
 {
 "Version": "2012-10-17",
 "Statement": [
@@ -345,7 +353,7 @@ This command generates a large JSON output.
 }
 ]
 }
-```
+
 ![step_11](./image-s3-cloudfront/11.png)
 
 12- We run the command to enable access to the bucket:
@@ -390,11 +398,6 @@ d2y6ebsgu5chp6.cloudfront.net/index.html
 
 ![step_16](./image-s3-cloudfront/16.png)
 
-## Challenges Faced
-- Managing public access restrictions in S3  
-- Understanding CloudFront configuration  
-- Handling hidden characters in scripts
-
 ## Project Impact
 
 - Demonstrates end-to-end AWS deployment using CLI  
@@ -433,9 +436,10 @@ d2y6ebsgu5chp6.cloudfront.net/index.html
 
 ## Future Improvements
 
-- Add HTTPS using AWS Certificate Manager  
-- Automate deployment with CI/CD  
-- Use Infrastructure as Code (Terraform)  
+- Implement Origin Access Control (OAC) to keep the S3 bucket fully private  
+- Configure HTTPS using AWS Certificate Manager (ACM)  
+- Automate deployment using CI/CD pipelines (GitHub Actions)  
+- Implement Infrastructure as Code (Terraform or CloudFormation)
 
 ## Author
 
