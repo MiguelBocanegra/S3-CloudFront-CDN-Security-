@@ -204,96 +204,133 @@ If AWS CLI is properly installed, the console will show the installed version.
 
 8- Now we add the access key so we can work in the CLI with the new user.
 
-We run the command:
-sed -i 's/\r$//' awsversion.sh to remove invisible characters.
+We run the command awsversion.sh 
+
+We remove invisible characters:
+
+```bash
+sed -i 's/\r$//' awsversion.sh
+```
 
 We change permissions:
+
+```bash
 chmod +x awsversion.sh
-
+```
 We run:
-sudo ./awsversion.sh
 
+```bash
+sudo ./awsversion.sh
+```
 The script works as follows:
 
 It requests the information and saves it in variables:
 
+```bash
 read -p "Enter your Access Key ID: " ACCESS_KEY  
 read -sp "Enter your Secret Access Key: " SECRET_KEY  
 echo " "  
 read -p "Enter the Region (e.g., us-east-1): " REGION  
 read -p "Enter output format (e.g., json): " OUTPUT_FORMAT  
-
+```
 It starts the configuration:
 
+```bash
 aws --version
+```
 
 It sets the configuration:
 
+```bash
 aws configure set aws_access_key_id "$ACCESS_KEY"  
 aws configure set aws_secret_access_key "$SECRET_KEY"  
 aws configure set default.region "$REGION"  
 aws configure set default.output "$OUTPUT_FORMAT"  
+```
 
 It confirms the configuration:
 
+```bash
 aws sts get-caller-identity
+```
+![step_8](./image-s3-cloudfront/8.png)
 
-Now we generate a bucket with all public access blocked and upload the website files.
+9- Now we generate a bucket with all public access blocked and upload the website files with the script awss3buc.sh.
 
-We run:
+We remove invisible characters:
+
+```bash
 sed -i 's/\r$//' awss3buc.sh
+```
 
 We change permissions:
-chmod +x awss3buc.sh
 
+```bash
+chmod +x awss3buc.sh
+```
 We execute:
+
+```bash
 sudo ./awss3buc.sh
+```
 
 After running the script, the console will display the following:
+
+![step_9](./image-s3-cloudfront/9.png)
 
 The script works as follows:
 
 The REGION variable is predefined because we are working in this region:
 
+```bash
 REGION="us-east-1"
-
+```
 It requests the information and stores it in variables:
 
+```bash
 read -p "Enter bucket name: " BUCKET_NAME  
-read -p "Enter folder path: " WEB_DIR  
-
+read -p "Enter folder path: " WEB_DIR
+``` 
 It creates a new bucket:
 
+```bash
 aws s3api create-bucket \
 --bucket $BUCKET_NAME \
 --region $REGION
-
+```
 It ensures that all access to the bucket is denied:
 
+```bash
 aws s3api put-public-access-block \
 --bucket $BUCKET_NAME \
 --public-access-block-configuration \
 BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
-
+```
 It uploads the website files:
 
+```bash
 aws s3 sync $WEB_DIR s3://$BUCKET_NAME/
-
+```
 It validates the uploaded files:
 
+```bash
 aws s3 ls s3://$BUCKET_NAME
-
-Now that the bucket is created and contains the website files, we can create a CloudFront distribution.
+```
+10- Now that the bucket is created and contains the website files, we can create a CloudFront distribution.
 
 We run the following command:
 
+```bash
 aws cloudfront create-distribution \
 --origin-domain-name your-bucket-name.s3.amazonaws.com
-
+```
 This command generates a large JSON output.
 
-Now we create a new .json file and add the policy that allows access to the S3 objects:
+![step_10](./image-s3-cloudfront/10.png)
 
+11- Now we create a new .json file and add the policy that allows access to the S3 objects:
+
+```bash
 {
 "Version": "2012-10-17",
 "Statement": [
@@ -306,35 +343,50 @@ Now we create a new .json file and add the policy that allows access to the S3 o
 }
 ]
 }
+```
+![step_11](./image-s3-cloudfront/11.png)
 
-We run the command to enable access to the bucket:
+12- We run the command to enable access to the bucket:
 
+```bash
 aws s3api put-public-access-block \
 --bucket <bucket_name> \
 --public-access-block-configuration \
 BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false
+```
+![step_12](./image-s3-cloudfront/12.png)
 
-We apply the policy with the command:
+13- We apply the policy with the command:
 
+```bash
 aws s3api put-bucket-policy \
 --bucket your-bucket-name \
 --policy file://policy.json
+```
+![step_13](./image-s3-cloudfront/13.png)
 
-We disable public access again:
+14- We disable public access again:
 
+```bash
 aws s3api put-public-access-block \
 --bucket <your_bucket_name> \
 --public-access-block-configuration \
 BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+```
+![step_14](./image-s3-cloudfront/15.png)
 
-We run:
+15- We run:
 
+```bash
 aws cloudfront list-distributions
+```
+![step_15](./image-s3-cloudfront/15.png)
 
-We take the DomainName value and append /index.html, then open it in a browser:
+16- We take the DomainName value and append /index.html, then open it in a browser:
 
 d2y6ebsgu5chp6.cloudfront.net/index.html
 
+![step_16](./image-s3-cloudfront/16.png)
 
 ## Challenges Faced
 - Managing public access restrictions in S3  
