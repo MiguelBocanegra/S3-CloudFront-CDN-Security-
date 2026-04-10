@@ -353,7 +353,7 @@ This command returns a JSON response with the CloudFront distribution configurat
     }
   ]
 }
-
+```
 ![step_11](./image-s3-cloudfront/11.png)
 
 12- We run the command to enable access to the bucket:
